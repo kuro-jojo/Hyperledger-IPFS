@@ -1,0 +1,45 @@
+{
+    "name": "blockchain-client",
+    "version": "1.0.0",
+    "description": "Node client for interacting with a Hyperledger Fabric blockchain network",
+    "main": "dist/app.js",
+    "type": "module",
+    "typings": "dist/app.d.ts",
+    "engines": {
+        "node": ">=18"
+    },
+    "scripts": {
+        "build": "npx tsc",
+        "start": "node dist/app.js",
+        "dev": "npm run build && nodemon src/app.ts"
+    },
+    "engineStrict": true,
+    "author": "Hyperledger",
+    "license": "Apache-2.0",
+    "dependencies": {
+        "@grpc/grpc-js": "^1.10.8",
+        "@hyperledger/fabric-gateway": "~1.4.0",
+        "express": "^4.19.2",
+        "kubo-rpc-client": "^4.1.1",
+        "multer": "^1.4.5-lts.1",
+        "uuid": "^9.0.1"
+    },
+    "devDependencies": {
+        "@chainsafe/libp2p-noise": "^15.0.0",
+        "@chainsafe/libp2p-yamux": "^6.0.1",
+        "@eslint/js": "^9.3.0",
+        "@helia/unixfs": "^3.0.0",
+        "@libp2p/bootstrap": "^10.0.12",
+        "@libp2p/identify": "^1.0.14",
+        "@libp2p/tcp": "^9.0.12",
+        "@tsconfig/node18": "^18.2.2",
+        "@tsconfig/node20": "^20.1.4",
+        "@types/express": "^4.17.21",
+        "@types/multer": "^1.4.11",
+        "@types/node": "^20.10.0",
+        "eslint": "^9.3.0",
+        "globals": "^15.3.0",
+        "ts-node": "^10.9.2",
+        "typescript": "~5.2.2"
+    }
+}

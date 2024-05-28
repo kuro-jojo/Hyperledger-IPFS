@@ -14,11 +14,11 @@ type SmartContract struct {
 }
 
 type Asset struct {
-	Date       time.Time `json:"date"`
-	Hash       string    `json:"hash"`
+	Date       time.Time `json:"Date"`
+	Hash       string    `json:"Hash"`
 	ID         string    `json:"ID"`
-	Owner      string    `json:"owner"`
-	SchoolName string    `json:"schoolName"`
+	Owner      string    `json:"Owner"`
+	SchoolName string    `json:"SchoolName"`
 }
 
 // InitLedger adds a base set of assets to the ledger
@@ -58,10 +58,13 @@ func (s *SmartContract) CreateAsset(ctx contractapi.TransactionContextInterface,
 	if exists {
 		return fmt.Errorf("the asset %s already exists", id)
 	}
-
+	t, err := ctx.GetStub().GetTxTimestamp()
+	if err != nil {
+		return err
+	}
 	asset := Asset{
 		ID:         id,
-		Date:       time.Now(),
+		Date:       t.AsTime(),
 		Hash:       hash,
 		Owner:      owner,
 		SchoolName: schoolName,
@@ -70,7 +73,6 @@ func (s *SmartContract) CreateAsset(ctx contractapi.TransactionContextInterface,
 	if err != nil {
 		return err
 	}
-
 	return ctx.GetStub().PutState(id, assetJSON)
 }
 

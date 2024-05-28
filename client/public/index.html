@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Add document to the blockchain</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark" aria-label="Eighth navbar example">
+        <div class="container">
+            <div class="collapse navbar-collapse" id="navbarsExample07">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link " aria-current="page" href="/add">Add document</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="#">Lists documents</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <main class="container col-md-6 mt-5 ">
+        <h2 class="mb-5 text-center">List of documents in the blockchain</h2>
+        <div id="resp"></div>
+    </main>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+        crossorigin="anonymous"></script>
+
+    <script>
+        fetch('/all')
+            .then(response => response.json())
+            .then(assets => {
+                // Now you have access to the assets in the HTML page
+                // You can display them in the HTML as you see fit
+                // For example, you can create a new paragraph for each asset and append it to the body
+                assets.forEach(asset => {
+                    var pre = document.createElement('pre');
+                    pre.classList.add('alert', 'alert-secondary', 'col-md-7', 'mx-auto');
+                    pre.textContent = JSON.stringify(asset, undefined, 2);
+                    document.body.appendChild(pre);
+                });
+            })
+            .catch(error => console.error('Error:', error));
+    </script>
+</body>
+
+</html>

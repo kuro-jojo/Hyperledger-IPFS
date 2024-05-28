@@ -1,5 +1,5 @@
 # To deploy the chaincode
-export CHAINCODE_PATH=change_this_to_your_chaincode_path
+export CHAINCODE_PATH=$HOME/Documents/ESP-DIC3/Blockchain/Projet/Hyperledger-IPFS/chaincode
 peer lifecycle chaincode package basic.tar.gz --path $CHAINCODE_PATH --lang golang --label basic_1.0
 
 ## Install the chaincode and approve it
