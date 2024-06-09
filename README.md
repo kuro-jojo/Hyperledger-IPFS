@@ -14,6 +14,7 @@
 - npm
 - Go
 - IPFS
+- jq
 
 ## Installation
 1. Cloner le projet
@@ -23,9 +24,25 @@ cd hyperledger
 ./start.sh
 
 ```
-3. Mise en place du client
+3. Démarrez le serveur IPFS
 ```bash
-cd client
+ipfs daemon --offline
+```
+4. Mise en place du client
+```bash
+cd ../client
 npm install
 npm run dev
+```
+
+## Utilisation
+Ouvrir un navigateur et accéder à l'adresse `http://localhost:3000`
+
+## Pour arrêter le projet
+1. Arrêtez le serveur IPFS
+2. Arrêtez le client
+3. Arrêtez la blockchain Hyperledger Fabric
+```bash
+    cd hyperledger
+    ./clean.sh
 ```

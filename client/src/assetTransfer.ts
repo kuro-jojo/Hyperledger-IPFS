@@ -26,6 +26,10 @@ export class AssetTransfert {
         return await UpdateAsset(asset);
     }
 
+    public async GetAsset(assetID: string): Promise<Asset | null> {
+        return await GetAsset(assetID);
+    }
+
 }
 const __dirname = path.dirname(process.cwd())
 
@@ -91,6 +95,8 @@ async function GetAllAssets(): Promise<Asset[]> {
 
         // Return all the current assets on the ledger.
         result = await getAllAssets(contract);
+    } catch (error) {
+        console.error(`******** FAILED to run the application: ${error}`);
 
     } finally {
         gateway.close();
@@ -132,6 +138,26 @@ async function UpdateAsset(asset: Asset): Promise<void> {
     }
 }
 
+async function GetAsset(assetID: string): Promise<Asset | null> {
+    const [client, gateway] = await GetGateway();
+    try {
+        // Get a network instance representing the channel where the smart contract is deployed.
+        const network = gateway.getNetwork(channelName);
+
+        // Get the smart contract from the network.
+        const contract = network.getContract(chaincodeName);
+
+        // Return all the current assets on the ledger.
+        return await readAssetByID(contract, assetID);
+    } catch (error) {
+        console.error(`******** FAILED to run the application: ${error}`);
+
+    } finally {
+        gateway.close();
+        client.close();
+    }
+    return null;
+}
 
 async function newGrpcConnection(): Promise<grpc.Client> {
     const tlsRootCert = await fs.readFile(tlsCertPath);
@@ -213,16 +239,17 @@ async function updateAssetAsync(contract: Contract, asset: Asset): Promise<void>
     }
 }
 
-async function readAssetByID(contract: Contract, asset: Asset): Promise<void> {
+async function readAssetByID(contract: Contract, id: string): Promise<Asset> {
     console.log('\n--> Evaluate Transaction: ReadAsset, function returns asset attributes');
-    if (!asset.ID) {
+    if (!id) {
         throw new Error('Asset ID is required to read an asset');
     }
-    const resultBytes = await contract.evaluateTransaction('ReadAsset', asset.ID);
+    const resultBytes = await contract.evaluateTransaction('ReadAsset', id);
 
     const resultJson = utf8Decoder.decode(resultBytes);
     const result = JSON.parse(resultJson);
-    console.log('*** Result:', result);
+
+    return result;
 }
 
 

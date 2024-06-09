@@ -4,6 +4,13 @@ import { create, globSource } from 'kubo-rpc-client'
 
 const ipfs = create();
 
+export async function CheckIPFS(): Promise<boolean> {
+    if (await ipfs.id()) {
+        return true
+    }
+    return false
+}
+
 // Uploads a file to IPFS and returns the CID
 export async function UploadToIPFS(file: Express.Multer.File) {
     console.info("Uploading file to IPFS", file.path);

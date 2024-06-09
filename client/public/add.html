@@ -19,6 +19,9 @@
                         <a class="nav-link active" aria-current="page" href="#">Add document</a>
                     </li>
                     <li class="nav-item">
+                        <a class="nav-link" aria-current="page" href="/document">Retrieve document</a>
+                    </li>
+                    <li class="nav-item">
                         <a class="nav-link " href="/">Lists documents</a>
                     </li>
                 </ul>
@@ -30,23 +33,23 @@
         <h2 class="mb-5 text-center">Add document to the blockchain</h2>
         <form enctype="multipart/form-data" class="col-md-7 mx-auto" id="form">
             <div class="">
-                <label class="form-label" for="name">Your name </label>
-                <input class="form-control" type="text" id="name" name="owner" required><br><br>
+                <label class="form-label" for="owner">Your name </label>
+                <input class="form-control" type="text" id="owner" name="owner" required><br><br>
             </div>
             <div class="">
-                <label class="form-label" for="name">Your school name </label>
-                <input class="form-control" type="text" id="name" name="schoolName" required><br><br>
+                <label class="form-label" for="schoolName">Your school name </label>
+                <input class="form-control" type="text" id="schoolName" name="schoolName" required><br><br>
             </div>
             <div class="mb-3">
                 <label for="document" class="form-label">Your attestation :</label>
-                <input class="form-control" type="file" id="document" name="document" required>
+                <input class="form-control" type="file" id="document" name="document" required accept=".pdf">
             </div>
             <div class="d-grid gap-2 col-6 mx-auto ">
                 <button class="btn btn-outline-info mt-5" type="submit">Send</button>
             </div>
         </form>
         <div class="result mt-5">
-            <div class="col-md-7 mx-auto">
+            <div class="col-md-10 mx-auto">
                 <div class="alert alert-success">
                     <h4 class="alert-heading">Well done!</h4>
                     <p> You successfully added a document to the blockchain.</p>
